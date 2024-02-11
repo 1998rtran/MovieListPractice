@@ -1,10 +1,11 @@
 import React from 'react';
 
-export default function AddMovie() {
+export default function AddMovie( {movieTitle, changeTitle, handleAdd} ) {
+
   return (
     <div>
-      <input placeholder='Add your favorite movie!' type='text'/>
-      <button>Add Movie!</button>
+      <input placeholder='Add your favorite movie!' type='text' value={movieTitle} onChange={changeTitle} />
+      <button onClick={handleAdd}>Add Movie!</button>
     </div>
   );
 }
