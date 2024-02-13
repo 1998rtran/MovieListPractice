@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import AddMovie from './AddMovie';
+import MovieList from './MovieList';
 
 
 export default function App() {
@@ -12,34 +13,29 @@ export default function App() {
   const [movieList, setMovieList] = useState(list);
   const [movieTitle, setMovieTitle] = useState('');
 
-  // list.forEach((movie) => {
-  //   console.log(movie);
-  // })
-
 const changeTitle = (e) => {
   setMovieTitle(e.target.value);
 }
 
 const handleAdd = () => {
-  var testList = movieList;
-  testList.unshift({title: movieTitle, watched: false});
-  setMovieList(testList);
-  console.log('new movie list', movieList);
+  var newList = movieList;
+  newList.unshift({title: movieTitle, watched: false});
+  setMovieList(newList);
   setMovieTitle('');
 }
 
-useEffect(() => {
+// useEffect(() => {
 
-}, movieList)
+// }, movieList)
 
-console.log('tHis is the movie title', movieTitle);
   return (
     <div id="App">
       <h1>Your Movie List!</h1>
       <AddMovie movieTitle={movieTitle} changeTitle={changeTitle} handleAdd={handleAdd}/>
-      <div>
+      <MovieList movieList={movieList}/>
+      {/* <div>
         {(movieList.map((movie, i)=>{return <ul key={i} title={movie.title}>{movie.title}</ul>}))}
-      </div>
+      </div> */}
     </div>
   );
 }
