@@ -24,6 +24,11 @@ const handleAdd = () => {
   setMovieTitle('');
 }
 
+const searchList = () => {
+var searchedList = movieList;
+
+}
+
 // useEffect(() => {
 
 // }, movieList)
@@ -31,11 +36,9 @@ const handleAdd = () => {
   return (
     <div id="App">
       <h1>Your Movie List!</h1>
+      <input type="text" placeholder="Search here!"/>
       <AddMovie movieTitle={movieTitle} changeTitle={changeTitle} handleAdd={handleAdd}/>
       <MovieList movieList={movieList}/>
-      {/* <div>
-        {(movieList.map((movie, i)=>{return <ul key={i} title={movie.title}>{movie.title}</ul>}))}
-      </div> */}
     </div>
   );
 }
