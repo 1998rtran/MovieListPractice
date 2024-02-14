@@ -35,8 +35,10 @@ var searchedList = movieList.filter((movie) => {
 })
 
 useEffect(() => {
-  if (searchInput !== 0) {
+  if (searchInput.length !== 0) {
     setMovieList(searchedList);
+  } else if (searchInput.length === 0) {
+    setMovieList(permList);
   }
 }, [searchInput])
 
