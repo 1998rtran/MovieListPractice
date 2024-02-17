@@ -42,12 +42,18 @@ useEffect(() => {
   }
 }, [searchInput])
 
+const handleRemove = (e) => {
+  var test = e.target.parentElement
+  console.log(test);
+  test.remove();
+}
+
   return (
     <div id="App">
       <h1>Your Movie List!</h1>
       <input type="text" placeholder="Search here!" onChange={handleSearch} value={searchInput} />
       <AddMovie movieTitle={movieTitle} changeTitle={changeTitle} handleAdd={handleAdd}/>
-      <MovieList movieList={movieList}/>
+      <MovieList movieList={movieList} handleRemove={handleRemove}/>
     </div>
   );
 }
