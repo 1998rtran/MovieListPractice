@@ -8,7 +8,7 @@ export default function App() {
   var list = [
     {title: 'Grown Ups', watched: false},
     {title: 'Mean Girls', watched: false},
-    {title: 'Spider-man', watched: false}
+    {title: 'Spider-man', watched: true}
   ];
   const [movieList, setMovieList] = useState(list);
   const [permList, setPermList] = useState(list);
@@ -43,17 +43,29 @@ useEffect(() => {
 }, [searchInput])
 
 const handleRemove = (e) => {
-  var test = e.target.parentElement
-  console.log(test);
-  test.remove();
+  var target = e.target.parentElement
+  target.remove();
 }
+
+const handleWatch = (movie) => {
+  console.log(movie);
+  if (movie.watched === true) {
+    movie.watched = false;
+  } else {
+    movie.watched = true;
+  }
+}
+
+// useEffect(() => {
+
+// }, [])
 
   return (
     <div id="App">
       <h1>Your Movie List!</h1>
       <input type="text" placeholder="Search here!" onChange={handleSearch} value={searchInput} />
       <AddMovie movieTitle={movieTitle} changeTitle={changeTitle} handleAdd={handleAdd}/>
-      <MovieList movieList={movieList} handleRemove={handleRemove}/>
+      <MovieList movieList={movieList} handleRemove={handleRemove} handleWatch={handleWatch}/>
     </div>
   );
 }
