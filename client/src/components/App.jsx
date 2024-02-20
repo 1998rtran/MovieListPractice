@@ -48,7 +48,7 @@ const handleRemove = (e) => {
 }
 
 const handleWatch = (movie) => {
-  console.log(movie);
+console.log(movie);
   if (movie.watched === true) {
     movie.watched = false;
   } else {
@@ -56,15 +56,34 @@ const handleWatch = (movie) => {
   }
 }
 
-// useEffect(() => {
+const filterWatched = () => {
+  var watchedList = permList.filter((movie) => {
+    return movie.watched;
+  })
+  setMovieList(watchedList);
+}
 
-// }, [])
+const filterToWatch = () => {
+  var toWatchList = permList.filter((movie) => {
+    return !movie.watched;
+  })
+  setMovieList(toWatchList);
+}
+
+const resetList = () => {
+  setMovieList(permList);
+}
 
   return (
     <div id="App">
       <h1>Your Movie List!</h1>
       <input type="text" placeholder="Search here!" onChange={handleSearch} value={searchInput} />
       <AddMovie movieTitle={movieTitle} changeTitle={changeTitle} handleAdd={handleAdd}/>
+      <div>
+        <button onClick={filterWatched}>Watched</button>
+        <button onClick={filterToWatch}>To Watch</button>
+        <button onClick={resetList}>Reset List!</button>
+      </div>
       <MovieList movieList={movieList} handleRemove={handleRemove} handleWatch={handleWatch}/>
     </div>
   );
