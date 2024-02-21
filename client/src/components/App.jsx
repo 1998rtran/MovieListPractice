@@ -31,7 +31,8 @@ setSearchInput(e.target.value);
 }
 
 var searchedList = movieList.filter((movie) => {
-  {return movie.title.toLowerCase().includes(searchInput.toLowerCase())}
+  {console.log(searchInput);
+    return movie.title.toLowerCase().includes(searchInput.toLowerCase())}
 })
 
 useEffect(() => {
@@ -42,9 +43,13 @@ useEffect(() => {
   }
 }, [searchInput])
 
-const handleRemove = (e) => {
-  var target = e.target.parentElement
-  target.remove();
+const handleRemove = (i) => {
+  // var target = e.target.parentElement
+  // target.remove();
+  console.log(i)
+  var oldList = movieList
+  var newList = oldList.splice(i, 1);
+  setMovieList(oldList);
 }
 
 const handleWatch = (movie) => {

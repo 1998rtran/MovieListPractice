@@ -5,7 +5,7 @@ export default function MovieEntry( { i, movie, handleRemove, handleWatch } ) {
     <div>
       <ul key={i} title={movie.title}>{movie.title}</ul>
       {(movie.watched ? <button onClick={()=>{handleWatch(movie)}}>watched</button> : <button onClick={()=>{handleWatch(movie)}}>to watch</button>)}
-      <button onClick={handleRemove} >X</button>
+      <button onClick={()=>{handleRemove(i)}} >X</button>
     </div>
   );
 };
