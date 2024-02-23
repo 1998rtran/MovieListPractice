@@ -7,6 +7,8 @@ const morgan = require('morgan');
 
 
 const app = express();
+const {movieList} = require('./database/db.js');
+
 app.use(morgan('dev'));
 
 
