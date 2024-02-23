@@ -30,10 +30,7 @@ const handleSearch = (e) => {
 setSearchInput(e.target.value);
 }
 
-var searchedList = movieList.filter((movie) => {
-  {console.log(searchInput);
-    return movie.title.toLowerCase().includes(searchInput.toLowerCase())}
-})
+var searchedList = permList.filter((movie) => {{return movie.title.toLowerCase().includes(searchInput.toLowerCase())}})
 
 useEffect(() => {
   if (searchInput.length !== 0) {
