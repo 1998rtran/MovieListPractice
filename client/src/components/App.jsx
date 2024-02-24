@@ -71,13 +71,24 @@ const handleRemove = (i) => {
   setMovieList(oldList);
 }
 
-const handleWatch = (movie) => {
-console.log(movie);
-  if (movie.watched === true) {
-    movie.watched = false;
-  } else {
-    movie.watched = true;
-  }
+const handleWatch = (movieTitle, movieWatched) => {
+console.log(movieTitle);
+axios.patch(('/movielist', {title: movieTitle, watched: movieWatched}))
+.then(() => {
+  return axios.get('/movielist')
+  .then((response) => {
+    setMovieList(response.data);
+    setPermList(response.data);
+  })
+  .catch((error) => {
+    console.error('unable to retrieve movie list');
+  })
+})
+//   if (movie.watched === true) {
+//     movie.watched = false;
+//   } else {
+//     movie.watched = true;
+//   }
 }
 
 const filterWatched = () => {

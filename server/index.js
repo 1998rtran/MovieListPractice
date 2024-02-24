@@ -35,6 +35,15 @@ app.post('/movielist', (req, res) => {
   res.send('successful post');
 })
 
+
+app.patch('/movielist', (req, res) => {
+  var query = { title: req.body.title };
+  console.log('this is the query: ', query);
+  movieList.findOneAndUpdate(query, {watched: !req.body.watched})
+  res.send('successful update');
+})
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server available at http://localhost${PORT}`);
