@@ -18,8 +18,21 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get('/test', (req, res) => {
-  res.send('hello world');
+app.get('/movielist', (req, res) => {
+  movieList.find({}).exec()
+  .then((data)=> {
+    console.log('this is get request data: ', data);
+    res.send(data);
+  })
+  .catch((error)=> {
+    console.error('Unable to get movie list');
+  })
+})
+
+app.post('/movielist', (req, res) => {
+  console.log("this is the request's body :", req.body);
+  movieList.create({ title: req.body.title, watched: req.body.watched });
+  res.send('successful post');
 })
 
 const PORT = process.env.PORT || 3000;

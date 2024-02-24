@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import AddMovie from './AddMovie';
 import MovieList from './MovieList';
-
+const axios = require('axios').default;
 
 export default function App() {
   var list = [
@@ -10,20 +10,42 @@ export default function App() {
     {title: 'Mean Girls', watched: false},
     {title: 'Spider-man', watched: true}
   ];
-  const [movieList, setMovieList] = useState(list);
-  const [permList, setPermList] = useState(list);
+  const [movieList, setMovieList] = useState([]);
+  const [permList, setPermList] = useState([]);
   const [movieTitle, setMovieTitle] = useState('');
   const [searchInput, setSearchInput] = useState('');
+
+useEffect(() => {
+  axios.get('/movielist')
+  .then((response) => {
+    console.log('this is the http request data: ', response.data);
+    setMovieList(response.data);
+    setPermList(response.data);
+  })
+  .catch((error) => {
+    console.error('Error retreiving response');
+  })
+}, [])
 
 const changeTitle = (e) => {
   setMovieTitle(e.target.value);
 }
 
-const handleAdd = () => {
-  var newList = movieList;
-  newList.unshift({title: movieTitle, watched: false});
-  setMovieList(newList);
-  setMovieTitle('');
+const handleAdd = (movieTitle) => {
+  axios.post('/movielist', {title: movieTitle, watched: false})
+  .then(() => {
+    return axios.get('/movielist')
+    .then((response) => {
+      setMovieList(response.data);
+      setPermList(response.data);
+    })
+    .catch((error) => {
+      console.error('Error retrieving response');
+    })
+    .then(() => {
+      setMovieTitle('');
+    })
+  })
 }
 
 const handleSearch = (e) => {
