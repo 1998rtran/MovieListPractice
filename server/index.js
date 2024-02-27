@@ -47,6 +47,14 @@ app.patch('/movielist', (req, res) => {
   })
 })
 
+app.delete('/movielist', (req, res) => {
+  console.log('delete request: ', req.body);
+movieList.findOneAndDelete({_id: req.body._id})
+.then(() => {
+  res.status(200).send('successful delete');
+})
+})
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

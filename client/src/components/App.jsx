@@ -62,13 +62,25 @@ useEffect(() => {
   }
 }, [searchInput])
 
-const handleRemove = (i) => {
-  // var target = e.target.parentElement
-  // target.remove();
-  console.log(i)
-  var oldList = movieList
-  var newList = oldList.splice(i, 1);
-  setMovieList(oldList);
+const handleRemove = (movie) => {
+  console.log(movie);
+  axios.delete('/movielist', {movie})
+  .then(() => {
+    return axios.get('/movielist')
+    .then((response) => {
+      setMovieList(response.data);
+      setPermList(response.data);
+    })
+    .catch((error) => {
+      console.error('Could not retrieve movie data');
+    })
+  })
+  // // var target = e.target.parentElement
+  // // target.remove();
+  // console.log(i)
+  // var oldList = movieList
+  // var newList = oldList.splice(i, 1);
+  // setMovieList(oldList);
 }
 
 const handleWatch = (movie) => {
