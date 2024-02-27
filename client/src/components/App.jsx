@@ -71,9 +71,9 @@ const handleRemove = (i) => {
   setMovieList(oldList);
 }
 
-const handleWatch = (movieTitle, movieWatched) => {
-console.log(movieTitle);
-axios.patch(('/movielist', {title: movieTitle, watched: movieWatched}))
+const handleWatch = (movie) => {
+console.log(movie);
+axios.patch('/movielist', {movie})
 .then(() => {
   return axios.get('/movielist')
   .then((response) => {
@@ -84,11 +84,6 @@ axios.patch(('/movielist', {title: movieTitle, watched: movieWatched}))
     console.error('unable to retrieve movie list');
   })
 })
-//   if (movie.watched === true) {
-//     movie.watched = false;
-//   } else {
-//     movie.watched = true;
-//   }
 }
 
 const filterWatched = () => {

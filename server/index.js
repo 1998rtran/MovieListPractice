@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('/movielist', (req, res) => {
   movieList.find({}).exec()
   .then((data)=> {
-    console.log('this is get request data: ', data);
+    // console.log('this is GET request data: ', data);
     res.send(data);
   })
   .catch((error)=> {
@@ -37,10 +37,14 @@ app.post('/movielist', (req, res) => {
 
 
 app.patch('/movielist', (req, res) => {
-  var query = { title: req.body.title };
-  console.log('this is the query: ', query);
-  movieList.findOneAndUpdate(query, {watched: !req.body.watched})
-  res.send('successful update');
+  var movie = req.body.movie;
+  movieList.findOneAndUpdate({_id: movie._id}, {watched: !movie.watched})
+  .then(()=>{
+    res.status(200).send('successful watched update');
+  })
+  .catch((err) => {
+    console.error('Unable to update watched status', err);
+  })
 })
 
 
