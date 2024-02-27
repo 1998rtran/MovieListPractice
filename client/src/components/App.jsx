@@ -64,7 +64,7 @@ useEffect(() => {
 
 const handleRemove = (movie) => {
   console.log(movie);
-  axios.delete('/movielist', {movie})
+  axios.delete('/movielist', {params: {movie}})
   .then(() => {
     return axios.get('/movielist')
     .then((response) => {

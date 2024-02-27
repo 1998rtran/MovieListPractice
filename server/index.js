@@ -48,11 +48,13 @@ app.patch('/movielist', (req, res) => {
 })
 
 app.delete('/movielist', (req, res) => {
-  console.log('delete request: ', req.body);
-movieList.findOneAndDelete({_id: req.body._id})
+  console.log('delete request: ', req.query.movie);
+movieList.findOneAndDelete({_id: req.query.movie._id})
 .then(() => {
   res.status(200).send('successful delete');
 })
+.catch((err) => {
+  console.error('Unable to remove movie from list');
 })
 })
 
